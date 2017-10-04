@@ -182,7 +182,8 @@ class Pokemon {
                     Alamofire.request(descURL).responseJSON { response in
                         if let descDict = response.result.value as? Dictionary<String, AnyObject> {
                             if let pokeDesc = descDict["description"] as? String {
-                                self._description = pokeDesc
+                                let correctedString = pokeDesc.replacingOccurrences(of: "POKMON", with: "pokemon")
+                                self._description = correctedString
                             }
                         }
                         completed()
@@ -203,8 +204,16 @@ class Pokemon {
                             let newString = uri.replacingOccurrences(of: "/api/v1/pokemon/", with: "")
                             let nextEvoID = newString.replacingOccurrences(of: "/", with: "")
                             self._nextEvolutionId = nextEvoID
-                            print(nextEvoID)
                         
+                        
+                            //if level exists prob
+                        if let lvlExists = evolutions[0]["level"] {
+                            if let lvl = lvlExists as? Int {
+                                self._nextEvolutionLevel = "\(lvl)"
+                            }
+                        
+                        } else {
+                            self._nextEvolutionLevel = ""
                         }
                     }
                 }
@@ -217,6 +226,7 @@ class Pokemon {
     }
 }
 
+}
 
 
 

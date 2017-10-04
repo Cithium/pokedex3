@@ -48,7 +48,7 @@ class PokeDetailViewController: UIViewController {
     }
     
     func updateUI() {
-        print("Arrived")
+        
         nameLabel.text = pokemon.name
         heightLabel.text = pokemon.height
         weightLabel.text = pokemon.weight
@@ -59,8 +59,16 @@ class PokeDetailViewController: UIViewController {
         typeLabel.text = pokemon.type.capitalized
         descriptionLabel.text = pokemon.description
         
-        print(pokemon.type)
         
+        
+        if pokemon.nextEvolutionId == "" {
+            
+            evoLabel.text = "No Evolutions"
+            nextIvoImage.isHidden = true
+        } else {
+            nextIvoImage.isHidden = false
+            nextIvoImage.image = UIImage(named: pokemon.nextEvolutionId)
+        }
         
         
     }
