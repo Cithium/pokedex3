@@ -59,7 +59,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         do {
             let csv = try CSV(contentsOfURL: path)
             let rows = csv.rows
-            print(rows)
+          
             
             for row in rows {
                 let pokeId = Int(row["id"]!)!
@@ -73,7 +73,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
      }
 
-    //Här väljs pokemon för att sedan visas i en ny detaljerat view.
+    //Här visas och väljs pokemon för att sedan visas i en ny detaljerat view.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pokeCell", for: indexPath) as? PokeCell {

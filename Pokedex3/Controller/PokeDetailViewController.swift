@@ -31,8 +31,38 @@ class PokeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Ladda in bilder etc går snabbare i ViewDidLoad, därför du ser små "inladdningar" när appen körs, men inte standard grejern som name, index osv,
 
+        let image = UIImage(named: "\(pokemon.pokedexId)")
+        
         nameLabel.text = pokemon.name
+        mainImage.image = image
+        currentIvoImage.image = image
+         pokedexLabel.text = "\(pokemon.pokedexId)"
+        
+        
+        pokemon.downloadPokemonDetails(){
+            self.updateUI()
+        }
+    }
+    
+    func updateUI() {
+        print("Arrived")
+        nameLabel.text = pokemon.name
+        heightLabel.text = pokemon.height
+        weightLabel.text = pokemon.weight
+        attackLabel.text = "\(pokemon.attack)"
+        defenseLabel.text = "\(pokemon.defense)"
+        pokedexLabel.text = "\(pokemon.pokedexId)"
+        
+        typeLabel.text = pokemon.type.capitalized
+        descriptionLabel.text = pokemon.description
+        
+        print(pokemon.type)
+        
+        
+        
     }
 
     
